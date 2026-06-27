@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   description: SEO.description,
   keywords: SEO.keywords,
   authors: [{ name: "Mirasoles" }],
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   robots: {
     index: true,
     follow: true,
