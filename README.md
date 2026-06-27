@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mirasoles — Landing Page
 
-## Getting Started
+**Aviso:** Este proyecto NO es la página oficial de Mirasoles. Es un proyecto personal / portafolio creado con fines educativos y de demostración. Busca replantear y mejorar la presencia digital del restaurante, replicando sus datos reales (menú, ubicación, contacto) con una estética moderna y cálida.
 
-First, run the development server:
+## Sobre el proyecto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Landing page conceptual para **Mirasoles**, un restaurante familiar ubicado en La Consulta, Mendoza. El sitio fue diseñado con una estética cálida y sofisticada: paleta bordo y oliva, tipografía Display, animaciones sutiles con Framer Motion y una experiencia mobile-first optimizada para conversión por WhatsApp.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack tecnológico
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Tecnología | Uso |
+|---|---|
+| Next.js 16 | Framework con App Router + Turbopack |
+| TypeScript | Tipado estricto |
+| Tailwind CSS v4 | Estilos utility-first con tokens personalizados |
+| Framer Motion | Animaciones scroll-reveal y transiciones |
+| Lucide React | Íconos SVG |
+| Radix UI Dialog | Lightbox del menú |
+| next/font | Google Fonts: Inter + Playfair Display |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Funcionalidades
 
-## Learn More
+- **Header** sticky con scroll-aware, menú hamburguesa mobile y CTA a WhatsApp
+- **Hero** full-viewport con círculos concéntricos decorativos, logo ring y dos CTAS
+- **Nosotros** sección two-column con texto + 3 value cards con íconos
+- **Menú** cards de comida y bebidas con lightbox y zoom progresivo (25%–400%)
+- **Galería** carrusel horizontal con auto-advance, navegación por flechas y dots, pausa al hacer hover/touch
+- **Ubicación** mapa embebido de Google Maps con sandbox de seguridad
+- **Contacto** 3 cards coloreadas (WhatsApp, Instagram, Dirección)
+- **Footer** 3 columnas con navegación interna y links a redes sociales
+- **Floating WhatsApp** botón flotante con animación pulse
+- **SEO** metadata completa, Open Graph, sitemap.xml, robots.txt, JSON-LD Schema.org (Restaurant)
+- **Seguridad** Content-Security-Policy, HSTS, X-Frame-Options, externalLinkProps helper, iframe sandbox, anti-scraper en número de WhatsApp
 
-To learn more about Next.js, take a look at the following resources:
+## Datos reales incluidos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Dirección: Ejército de los Andes 42, La Consulta, Mendoza
+- Teléfono: +54 2622 40-8799
+- WhatsApp: link directo de atención
+- Instagram: @mirasoles.ok
+- Menú: carta de comidas y bebidas
+- Horarios: jueves a domingo 20:30hs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Créditos
 
-## Deploy on Vercel
+- **Mirasoles** — Datos reales del restaurante (no afiliado)
+- Diseño web conceptual con estética cálida y moderna
+- Creado como proyecto de portafolio / demostración
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proyecto: Mirasoles Landing Page · Next.js 16 + TypeScript + Tailwind CSS v4 + Framer Motion
