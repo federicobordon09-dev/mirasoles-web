@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --color-bordo: #3D0C11;
+  --color-bordo-dark: #2A0809;
+  --color-oliva: #3B4A2F;
+  --color-crema: #F4E7D3;
+  --color-acento: #C58A3A;
+  --color-texto: #2B2B2B;
+  --color-blanco: #FAFAF8;
+
+  --font-playfair: var(--font-playfair);
+  --font-inter: var(--font-inter);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+
+  --color-bordo: #3D0C11;
+  --color-bordo-dark: #2A0809;
+  --color-oliva: #3B4A2F;
+  --color-crema: #F4E7D3;
+  --color-acento: #C58A3A;
+  --color-texto: #2B2B2B;
+  --color-blanco: #FAFAF8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-crema);
+  color: var(--color-texto);
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-playfair), serif;
+}
+
+@keyframes pulse-whatsapp {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-whatsapp {
+  animation: pulse-whatsapp 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-pulse-whatsapp {
+    animation: none;
+  }
+}
