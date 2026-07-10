@@ -4,6 +4,7 @@ import { Phone, MapPin } from "lucide-react";
 import { CONTACTO } from "@/lib/contenido";
 import { externalLinkProps } from "@/lib/utils";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 const InstagramIcon = ({ size, className }: { size: number; className?: string }) => (
   <svg
@@ -31,9 +32,9 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const bgMap: Record<string, string> = {
-  whatsapp: "bg-oliva",
-  instagram: "bg-bordo",
-  map: "bg-acento",
+  whatsapp: "bg-gradient-to-br from-oliva to-[#2c3823]",
+  instagram: "bg-gradient-to-br from-bordo to-bordo-dark",
+  map: "bg-gradient-to-br from-acento to-[#a8722d]",
 };
 
 const textColorMap: Record<string, string> = {
@@ -46,25 +47,20 @@ export default function Contacto() {
   return (
     <section id="contacto" className="py-20 md:py-28 bg-crema">
       <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <Reveal>
-          <div className="text-center mb-4">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-bordo mb-4">
-              {CONTACTO.title}
-            </h2>
-            <p className="text-texto/70 text-lg max-w-xl mx-auto">
-              {CONTACTO.subtitle}
-            </p>
-            <div className="w-16 h-1 bg-acento mx-auto mt-4" />
-          </div>
-        </Reveal>
+        <SectionHeading
+          eyebrow="Contacto"
+          title={CONTACTO.title}
+          subtitle={CONTACTO.subtitle}
+          align="center"
+        />
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mt-12">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {CONTACTO.channels.map((ch, i) => (
             <Reveal key={ch.label} delay={0.15 * i}>
               <a
                 href={ch.href}
                 {...externalLinkProps}
-                className={`${bgMap[ch.icon]} ${textColorMap[ch.icon]} rounded-2xl p-8 flex flex-col items-center text-center gap-4 shadow-md hover:shadow-xl transition-all hover:-translate-y-1`}
+                className={`${bgMap[ch.icon]} ${textColorMap[ch.icon]} rounded-3xl p-8 flex flex-col items-center text-center gap-4 shadow-md hover:shadow-2xl transition-all hover:-translate-y-1.5 active:translate-y-0`}
                 aria-label={ch.label}
               >
                 <div className="w-14 h-14 rounded-full bg-blanco/10 flex items-center justify-center">

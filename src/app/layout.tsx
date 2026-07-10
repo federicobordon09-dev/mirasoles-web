@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { SEO } from "@/lib/contenido";
 import ScrollRestore from "@/components/ScrollRestore";
@@ -13,8 +13,16 @@ const inter = Inter({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["400", "500", "700", "900"],
+  style: ["normal", "italic"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#2A0809",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mirasoles.vercel.app"),
@@ -39,7 +47,7 @@ export const metadata: Metadata = {
     description: SEO.openGraph.description,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/02.jpg",
         width: 1200,
         height: 630,
         alt: "Mirasoles Restaurante en La Consulta Mendoza",

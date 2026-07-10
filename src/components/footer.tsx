@@ -4,6 +4,7 @@ import { Phone } from "lucide-react";
 import { FOOTER, RESTAURANTE } from "@/lib/contenido";
 import { scrollToSection, externalLinkProps } from "@/lib/utils";
 import Image from "next/image";
+import SunMark from "./SunMark";
 
 const InstagramIcon = ({ size, className }: { size: number; className?: string }) => (
   <svg
@@ -30,8 +31,12 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-bordo-dark text-crema/80 py-12 md:py-16">
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
+    <footer className="relative overflow-hidden bg-bordo-dark text-crema/80 py-12 md:py-16">
+      <SunMark
+        color="var(--color-acento)"
+        className="pointer-events-none absolute -left-20 -bottom-24 w-64 h-64 opacity-[0.05]"
+      />
+      <div className="relative max-w-6xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-8">
           <div>
             <div className="flex items-center gap-3 mb-4">

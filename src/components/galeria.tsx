@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GALERIA } from "@/lib/contenido";
 import Image from "next/image";
-import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 const INTERVALO = 3500;
 
@@ -13,7 +13,10 @@ export default function Galeria() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const currentIndexRef = useRef(currentIndex);
-  currentIndexRef.current = currentIndex;
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
 
   const total = GALERIA.media.length;
 
@@ -24,7 +27,10 @@ export default function Galeria() {
     if (!child) return;
     const containerRect = el.getBoundingClientRect();
     const childRect = child.getBoundingClientRect();
-    const targetLeft = el.scrollLeft + (childRect.left - containerRect.left);
+    const targetLeft =
+      el.scrollLeft +
+      (childRect.left - containerRect.left) -
+      (containerRect.width - childRect.width) / 2;
     el.scrollTo({ left: targetLeft, behavior: "smooth" });
   }, []);
 
@@ -42,9 +48,15 @@ export default function Galeria() {
 
   useEffect(() => {
     if (isPaused) return;
-    const id = setInterval(next, INTERVALO);
+    const id = setInterval(() => {
+      setCurrentIndex((prev) => {
+        const nextIdx = (prev + 1) % total;
+        scrollToIndex(nextIdx);
+        return nextIdx;
+      });
+    }, INTERVALO);
     return () => clearInterval(id);
-  }, [isPaused, next]);
+  }, [isPaused, total, scrollToIndex]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -70,16 +82,12 @@ export default function Galeria() {
 
   return (
     <section id="galeria" className="py-20 md:py-28 bg-crema overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 mb-8 md:mb-12">
-        <Reveal>
-          <div className="text-center">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-bordo mb-4">
-              {GALERIA.title}
-            </h2>
-            <p className="text-texto/70 text-lg">{GALERIA.subtitle}</p>
-            <div className="w-16 h-1 bg-acento mx-auto mt-4" />
-          </div>
-        </Reveal>
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <SectionHeading
+          title={GALERIA.title}
+          subtitle={GALERIA.subtitle}
+          align="center"
+        />
       </div>
 
       <div
@@ -109,32 +117,39 @@ export default function Galeria() {
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {GALERIA.media.map((item, i) => (
-            <div
-              key={item.src}
-              data-index={i}
-              className="snap-start shrink-0 w-[85vw] md:w-[500px] aspect-[4/3] rounded-2xl overflow-hidden shadow-md relative bg-oliva/10"
-            >
-              {item.type === "video" ? (
-                <video
-                  src={item.src}
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-              ) : (
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 768px) 85vw, 500px"
-                  className="object-cover"
-                />
-              )}
-            </div>
-          ))}
+          {GALERIA.media.map((item, i) => {
+            const isActive = i === currentIndex;
+            return (
+              <div
+                key={item.src}
+                data-index={i}
+                className={`group snap-center shrink-0 w-[85vw] md:w-[500px] aspect-[4/3] rounded-2xl overflow-hidden relative bg-oliva/10 transition-all duration-500 ${
+                  isActive
+                    ? "md:scale-100 opacity-100 shadow-xl"
+                    : "md:scale-90 opacity-60 shadow-md"
+                }`}
+              >
+                {item.type === "video" ? (
+                  <video
+                    src={item.src}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 768px) 85vw, 500px"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="flex justify-center gap-3 mt-5">

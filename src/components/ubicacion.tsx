@@ -36,9 +36,13 @@ export default function Ubicacion() {
 
           <div className="md:col-span-2 flex flex-col gap-6">
             <Reveal>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-blanco leading-tight">
+              <span className="text-acento text-sm font-medium uppercase tracking-[0.2em] block">
+                Ubicación
+              </span>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-blanco leading-tight tracking-tight mt-2">
                 {UBICACION.title}
               </h2>
+              <div className="w-16 h-1 bg-acento mt-5 rounded-full" />
             </Reveal>
 
             <Reveal delay={0.15}>
@@ -54,7 +58,7 @@ export default function Ubicacion() {
               <a
                 href={RESTAURANTE.googleMaps}
                 {...externalLinkProps}
-                className="inline-flex items-center gap-2 bg-acento hover:bg-acento/90 text-bordo-dark px-6 py-3.5 rounded-full text-base font-semibold transition-all self-start shadow-md hover:shadow-lg"
+                className="shine inline-flex items-center gap-2 bg-acento hover:bg-acento/90 text-bordo-dark px-6 py-3.5 rounded-full text-base font-semibold transition-all self-start shadow-md hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]"
                 aria-label={UBICACION.cta}
               >
                 <ExternalLink size={18} aria-hidden="true" />
