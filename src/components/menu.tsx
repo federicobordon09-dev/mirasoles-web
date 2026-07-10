@@ -3,17 +3,17 @@
 import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Plus, Minus, Eye } from "lucide-react";
+import { X, Eye } from "lucide-react";
 import { MENU_SECTION } from "@/lib/contenido";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
+import CartaViewer from "./CartaViewer";
 
 export default function Menu() {
   const [selected, setSelected] = useState<string | null>(null);
-  const [scale, setScale] = useState(1);
 
-  const reset = () => { setSelected(null); setScale(1); };
+  const reset = () => setSelected(null);
 
   return (
     <section id="menu" className="py-20 md:py-28 bg-bordo-dark">
@@ -30,7 +30,7 @@ export default function Menu() {
             <Reveal key={i} delay={0.15 * i}>
               <div className="flex flex-col gap-4">
                 <button
-                  onClick={() => { setSelected(item.image); setScale(1); }}
+                  onClick={() => setSelected(item.image)}
                   className="group relative aspect-[4/5] sm:aspect-[3/4] rounded-2xl overflow-hidden bg-bordo ring-1 ring-acento/10 shadow-lg hover:shadow-2xl hover:ring-acento/40 transition-all cursor-pointer active:scale-[0.99]"
                   aria-label={`Ver ${item.label}`}
                 >
@@ -93,41 +93,7 @@ export default function Menu() {
                     </Dialog.Close>
                   </div>
 
-                  <div className="relative flex-1 overflow-auto overscroll-contain p-3 sm:p-4 flex justify-center">
-                    <div
-                      className="h-fit transition-[width] duration-200"
-                      style={{ width: `${scale * 100}%`, maxWidth: `${scale * 900}px` }}
-                    >
-                      <img
-                        src={selected}
-                        alt="Carta de Mirasoles"
-                        className="w-full h-auto rounded-lg select-none"
-                        draggable={false}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-center gap-3 py-3 bg-black/60 shrink-0">
-                    <button
-                      onClick={() => setScale((s) => Math.max(1, +(s - 0.25).toFixed(2)))}
-                      className="text-blanco hover:text-acento disabled:opacity-30 transition-colors p-3"
-                      aria-label="Alejar"
-                      disabled={scale <= 1}
-                    >
-                      <Minus size={22} aria-hidden="true" />
-                    </button>
-                    <span className="text-blanco text-sm font-medium w-14 text-center tabular-nums">
-                      {Math.round(scale * 100)}%
-                    </span>
-                    <button
-                      onClick={() => setScale((s) => Math.min(4, +(s + 0.25).toFixed(2)))}
-                      className="text-blanco hover:text-acento disabled:opacity-30 transition-colors p-3"
-                      aria-label="Acercar"
-                      disabled={scale >= 4}
-                    >
-                      <Plus size={22} aria-hidden="true" />
-                    </button>
-                  </div>
+                  <CartaViewer key={selected} src={selected} />
                 </motion.div>
               </Dialog.Content>
             </Dialog.Portal>
